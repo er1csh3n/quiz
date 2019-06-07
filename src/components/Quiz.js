@@ -7,17 +7,17 @@ class Quiz extends Component {
         super(props);
         this.state = {
             questionIndex: 0,
-            //probably redux store
             questionNumber: 1,
-            score: 0,
+            score: 0, //in redux store
         }
     }
 
 
     componentDidMount() {
-        !this.props.questions && this.props.getQuestions(); //Node API call
+        !this.props.questions && this.props.getQuestions(); //async API call when questions doesn't exist
     }
 
+    //sets target.value from click event to user answer
     handleAnswer = (ans) => {
         console.log(ans.target.value);
         const answer = ans.target.value;
@@ -26,6 +26,7 @@ class Quiz extends Component {
         })
     };
 
+    //calculates score of correct by dispatching getScore() every time userAnswer is the correct answer
     handleScore = (e) => {
         e.preventDefault();
         const userAnswer = this.state.answer;
@@ -37,6 +38,8 @@ class Quiz extends Component {
         this.handleNext();
     };
 
+    //handles next question by incrementing index and number to render next question and dispatches isFinished() when
+    //we have reached the last question of quiz
     handleNext = () => {
         const questionIndex = this.state.questionIndex + 1;
         const questionNumber = this.state.questionNumber + 1;
@@ -57,6 +60,7 @@ class Quiz extends Component {
     //}
     //}
 
+    //while finished is false display question
     displayQuestion = () => {
         if (!this.props.finished){
             return (
@@ -64,14 +68,20 @@ class Quiz extends Component {
             )}
     };
 
+    //while finished is false render question options
     displayChoices = () => {
         if (!this.props.finished){
             return this.props.questions[this.state.questionIndex].answers.map((ans) => {
                 return (
                     <div className="answer_choices">
                         <label className="radioCustomLabel">
-                            <input className="checkmark" type="radio" name="answer" value={ans} onChange={this.handleAnswer}/>
-                            <span style={{fontSize: '20px'}}>{ans}</span>
+                            <input
+                                className="radio_box"
+                                type="radio" name="answer"
+                                value={ans}
+                                onChange={this.handleAnswer}
+                            />
+                            <span style={{fontSize: '24px', fontWeight: 'bold'}}>{ans}</span>
                         </label>
                     </div>
                 )
@@ -88,9 +98,9 @@ class Quiz extends Component {
                             <i style={{color: '#ffffff'}}>Question {this.state.questionNumber} out of {this.props.questions.length}</i>
                             <strong style={{color: '#ffffff'}}>{this.displayQuestion()}</strong>
                         </div>
-                        <form>
+                        <form className="form-group">
                             {this.displayChoices()}
-                            <button onClick={this.handleScore}>Next</button>
+                            <button className= "btn btn-outline-dark" onClick={this.handleScore}>Next</button>
                         </form>
                     </div>
                 </div>
@@ -103,7 +113,7 @@ class Quiz extends Component {
 }
 
 
-const mapStateToProps = (state) => { //React Redux implementation
+const mapStateToProps = (state) => { //what we need from store
     return {
         questions: state.questions,
         finished: state.finished,
@@ -112,3 +122,4 @@ const mapStateToProps = (state) => { //React Redux implementation
 };
 
 export default connect(mapStateToProps, {getQuestions, isFinished, getScore})(Quiz);
+// connect(what we need from store, what we dispatch)

@@ -6,7 +6,7 @@ export const IS_FINISHED = 'IS_FINISHED';
 export const GET_SCORE = 'GET_SCORE';
 
 
-
+//returns promise that is an axios API get request
 export const getQuestions = () => {
     const getQuestionsPromise = axios.get(URL);
     return {

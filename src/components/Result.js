@@ -5,8 +5,8 @@ class Result extends React.Component {
     render() {
         if (this.props.questions){
             return (
-                <div>
-                    <h1> Score: {this.props.score} out of {this.props.questions.length}</h1>
+                <div className="card">
+                    <h1> Score: <strong>{this.props.score}</strong> out of <strong>{this.props.questions.length}</strong> correct!</h1>
                 </div>
             )
         }

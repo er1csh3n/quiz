@@ -32,24 +32,14 @@ body {
   border-radius: 3px;
 }
 
+/*css for mobile devices*/
 @media (min-width: 769px) {
   .container {
     margin: 2.5rem auto;
   }
 }
 
-/* Result Component */
-.result {
-  padding: 1.5rem 2.5rem;
-}
-
-/* Quiz Component */
-.answerOptions {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
+/*centers main div element*/
 .center_div {
   margin: 0 auto;
   margin-top: 30px;
@@ -57,6 +47,7 @@ body {
   overflow: auto;
   width: 60%;
 }
+
 
 .question_counter {
   text-align: left;
@@ -120,39 +111,8 @@ body {
 }
 
 
-/* Animation */
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out 0.3s;
-}
-
-.fade-exit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.fade-appear {
-  opacity: 0;
-}
-
-.fade-appear.fade-appear-active {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.checkmark {
+/*css for radio selection*/
+.radio_box {
   position: absolute;
   top: 0;
   left: 0;

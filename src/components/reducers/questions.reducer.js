@@ -1,5 +1,6 @@
 import { GET_QUESTIONS, IS_FINISHED, GET_SCORE } from "../actions/questions.action";
 
+//returns question data from getQuestion action is dispatched else return state
 export const questionsReducer = (state = null, action) => {
     switch (action.type) {
         case GET_QUESTIONS:
@@ -13,6 +14,7 @@ export const questionsReducer = (state = null, action) => {
 
 };
 
+//changes state of finished to true when isFinished action is dispatched else return state
 export const finishedReducer = (state = false, action) => {
     switch (action.type) {
         case IS_FINISHED:
@@ -22,6 +24,7 @@ export const finishedReducer = (state = false, action) => {
     }
 };
 
+//increments score/correct count every time getScore is dispatched, else return state(unchanged score)
 export const scoreReducer = (state = 0, action) => {
     switch (action.type) {
         case GET_SCORE:

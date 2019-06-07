@@ -11,14 +11,14 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="App">
+            <main className="App">
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                     <h2>Quartz Quiz</h2>
                 </div>
                 <div>{this.props.finished}</div>
                 {this.props.finished ? <Result/> : <Quiz/>}
-            </div>
+            </main>
         );
     }
 }
