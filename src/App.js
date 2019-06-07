@@ -2,35 +2,36 @@ import React from 'react';
 import './App.css';
 import { getQuestions} from "./components/actions/questions.action";
 import { connect } from "react-redux";
+import Quiz from './components/Quiz';
+import Result from './components/Result';
+import logo from './svg/logo.svg';
 
 class App extends React.Component {
-
-
-    componentDidMount() {
-        !this.props.questions && this.props.getQuestions(); //Node API call
-    }
-
 
 
     render() {
         return (
             <div className="App">
                 <div className="App-header">
-                    <h2>React Quiz</h2>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h2>Quartz Quiz</h2>
                 </div>
+                <div>{this.props.finished}</div>
+                {this.props.finished ? <Result/> : <Quiz/>}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => { //React Redux implementation
+    console.log(state);
     return {
-        questions: state.questions
+        questions: state.questions,
+        finished: state.finished
     }
 };
 
 
 export default connect(mapStateToProps, {getQuestions})(App);
-
 
 

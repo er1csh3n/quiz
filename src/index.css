@@ -50,24 +50,35 @@ body {
   list-style: none;
 }
 
-/* QuestionCount Component */
-.questionCount {
-  padding: 1.5rem 2.5rem 0;
-  font-size: 14px;
+.center_div {
+  margin: 0 auto;
+  margin-top: 30px;
+  display: block;
+  overflow: auto;
+  width: 60%;
 }
 
-/* Question Component */
+.question_counter {
+  text-align: left;
+}
+
+
+/* css for displaying question */
 .question {
   margin: 0;
-  padding: 0.5rem 2.5rem 1.5rem 2.5rem;
+  padding: 1rem 2.5rem 1rem 2.5rem;
+  font-size: 30px;
+  text-align: center;
 }
 
-/* AnswerOption Component */
-.answerOption {
+.answer_choices {
   border-top: 1px solid #eee;
+  text-align: left;
 }
 
-.answerOption:hover {
+
+
+.answer_choices:hover {
   background-color: #eefbfe;
 }
 
@@ -108,11 +119,6 @@ body {
   transition: all 0.3s;
 }
 
-.radioCustomButton:checked ~ .radioCustomLabel:before {
-  content: '';
-  background-size: 27px;
-  border-color: #8bc53f;
-}
 
 /* Animation */
 .fade-enter {
@@ -144,4 +150,15 @@ body {
 .fade-appear.fade-appear-active {
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+  margin: 27px 10px 10px 40px;
 }

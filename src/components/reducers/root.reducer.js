@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
-import {questionsReducer } from "./questions.reducer";
+import {finishedReducer, questionsReducer, scoreReducer} from "./questions.reducer";
 
 
 export const rootReducer = combineReducers({
-    questions: questionsReducer
+    questions: questionsReducer,
+    finished: finishedReducer,
+    score: scoreReducer
 });
