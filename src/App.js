@@ -6,9 +6,13 @@ import Quiz from './components/Quiz';
 import Result from './components/Result';
 import logo from './svg/logo.svg';
 
+/** Class that represents App Component */
 class App extends React.Component {
 
 
+    /**
+     * conditionally renders Quiz component while finished is false and Result component when it is true
+     */
     render() {
         return (
             <main className="App">
@@ -23,7 +27,10 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => { //React Redux implementation
+/**
+ * selects what we need from redux store (questions, finished) and returns as an object every time store state changes
+ */
+const mapStateToProps = (state) => {
     console.log(state);
     return {
         questions: state.questions,

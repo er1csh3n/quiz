@@ -2,22 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getQuestions, isFinished, getScore } from './actions/questions.action';
 
+/** Class that represents Quiz Component */
 class Quiz extends Component {
+
+    /**
+     * @constructor
+     * set initial state with questionIndex and questionNumber to load first question
+     * set initial score to 0 (score is connected to redux store)
+     */
     constructor(props) {
         super(props);
         this.state = {
             questionIndex: 0,
             questionNumber: 1,
-            score: 0, //in redux store
+            score: 0
         }
     }
 
 
+    /**
+     * after mounting, perform async API call to server to get questions as a JSON object
+     */
     componentDidMount() {
-        !this.props.questions && this.props.getQuestions(); //async API call when questions doesn't exist
+        !this.props.questions && this.props.getQuestions();
     }
 
-    //sets target.value from click event to user answer
+    /**
+     * answer handler that sets target.value to user answer from click event
+     * @param {string} ans - user answer from click event
+     */
     handleAnswer = (ans) => {
         console.log(ans.target.value);
         const answer = ans.target.value;
@@ -26,7 +39,10 @@ class Quiz extends Component {
         })
     };
 
-    //calculates score of correct by dispatching getScore() every time userAnswer is the correct answer
+
+    /**
+     * score handler that dispatches getScore() every time the userAnswer is a correct answer
+     */
     handleScore = (e) => {
         e.preventDefault();
         const userAnswer = this.state.answer;
@@ -38,8 +54,10 @@ class Quiz extends Component {
         this.handleNext();
     };
 
-    //handles next question by incrementing index and number to render next question and dispatches isFinished() when
-    //we have reached the last question of quiz
+    /**
+     * next question handler that renders next question by incrementing questionIndex and questionNumber until
+     * the last question in which case isFinished() is dispatched to render Result component
+     */
     handleNext = () => {
         const questionIndex = this.state.questionIndex + 1;
         const questionNumber = this.state.questionNumber + 1;
@@ -54,13 +72,10 @@ class Quiz extends Component {
         }
     };
 
-    //handleFinish = () => {
-    //if (this.state.questionNumber > this.props.questions.length){
-    //this.props.isFinished();
-    //}
-    //}
 
-    //while finished is false display question
+    /**
+     * displays question while quiz is not finished
+     */
     displayQuestion = () => {
         if (!this.props.finished){
             return (
@@ -68,7 +83,9 @@ class Quiz extends Component {
             )}
     };
 
-    //while finished is false render question options
+    /**
+     * displays question options while quiz is not finished
+     */
     displayChoices = () => {
         if (!this.props.finished){
             return this.props.questions[this.state.questionIndex].answers.map((ans) => {
@@ -80,6 +97,7 @@ class Quiz extends Component {
                                 type="radio" name="answer"
                                 value={ans}
                                 onChange={this.handleAnswer}
+                                required
                             />
                             <span style={{fontSize: '24px', fontWeight: 'bold'}}>{ans}</span>
                         </label>
@@ -89,6 +107,9 @@ class Quiz extends Component {
         }
     };
 
+    /**
+     * renders question counter, question, question options and handles next question with submit button
+     */
     render() {
         if (this.props.questions) {
             return (
@@ -112,8 +133,11 @@ class Quiz extends Component {
     }
 }
 
-
-const mapStateToProps = (state) => { //what we need from store
+/**
+ * selects what we need from redux store (questions, finished, score) and returns as an object
+ * every time store state changes
+ */
+const mapStateToProps = (state) => {
     return {
         questions: state.questions,
         finished: state.finished,
@@ -122,4 +146,3 @@ const mapStateToProps = (state) => { //what we need from store
 };
 
 export default connect(mapStateToProps, {getQuestions, isFinished, getScore})(Quiz);
-// connect(what we need from store, what we dispatch)

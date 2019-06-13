@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+/** Class that represents Result Component */
 class Result extends React.Component {
+
+    /**
+     * renders result page that displays total score
+     */
     render() {
         if (this.props.questions){
             return (
@@ -16,6 +21,9 @@ class Result extends React.Component {
     }
 }
 
+/**
+ * selects what we need from redux store (questions, score) and returns as an object every time store state changes
+ */
 const mapStateToProps = (state) => {
     return {
         questions: state.questions,
